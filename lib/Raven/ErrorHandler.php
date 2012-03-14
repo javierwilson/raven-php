@@ -31,6 +31,10 @@ class Raven_ErrorHandler
     }
 
     function handleError($code, $message, $file='', $line=0, $context=array()) {
+
+        # en caso de operador de control de errores: "@", ignorar error
+        if (error_reporting() === 0) return;
+
         $e = new ErrorException($message, 0, $code, $file, $line);
         $this->handleException($e);
     }
